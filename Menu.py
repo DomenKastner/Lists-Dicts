@@ -1,59 +1,38 @@
 # -*- coding: utf-8 -*-
-meni = dict()
 
-meni2 = [
-    ["nekaj", True],
-]
+# Program za vnos ter izpis jedilnika
+
+menu = dict()
 
 while True:
 
-    jed = raw_input("Vpiši vrsto jedi:")
-    cena = int(raw_input("Vpiši ceno jedi:"))
+    jed = raw_input("Vpiši jed: ")  # Vpišem jed
+    print "Vpisali ste: " + jed
 
-    dodal = raw_input("Bi dodal še kakšno jed (y/n)?")
+    cena = raw_input("Vpiši ceno: ")  # Vpišem ceno
+    print "Vnesli ste: " + cena + " €"
 
-    if dodal == "y":
-        meni[jed, cena] = True
-    else:
+    menu[jed + cena] = cena  # <--- Tega ne razumem kaj to naredi ?
+
+    for item in menu:  # od nekaj v meni (dict) naprinta v naslednjo vrstico naš vnos
+            print jed + " " + cena + " €"
+
+    dodati = raw_input("Bi dodali še kakšno jed (y/n)?: ")  # Vpraša po ponovitvi
+    if dodati != "y":
         break
 
-prin = raw_input("Zelis natisniti meni (y/n)")
+natisni = raw_input("Želite natisniti cenik (y/n) :")
+if natisni == "y":
+        menu = open("Menu.txt", "w+")  # open the TXT file (or create a new one)
+        print "cenik:"
+        menu.write("cenik\n" + "-" + jed + " " + cena)  # write into the TXT file
 
-if prin == "y":
+print "Dober tek"
 
-    print("menu:")
-    jed= 0
-    cena = 0
+# -----------------------------------------------------------------------------------#
 
-    for nekaj in meni:
-        print(nekaj, meni[nekaj])
+# Ko dodajam novo jed mi prejšnjo prepiše z novo vrednostjo?
 
-        if meni[nekaj] == True:
-            cena = cena +1
-            print ("Jed")
+# Ne zastopim kaj naredi 14 vrstica. Brez tega ne shrani v meni?
 
-        else:
-            jed = jed +1
-            print("cena")
-
-    print(jed)
-    print(cena)
-
-
-    todo_file = open("menu.txt", "w+")  # open the TXT file (or create a new one)
-
-    print "Jed:"
-    todo_file.write("Jed:\n")  # write into the TXT file
-    for jed in meni:
-        if meni[jed] == True:
-            print "- " + jed
-            todo_file.write("- " + jed + "\n")  # add task into the TXT file
-
-    todo_file.write("\n")
-
-    print "Cena:"
-    todo_file.write("Cena:\n")  # write into the TXT file
-    for cena in meni:
-        if meni[cena] == False:
-            print "- " + cena
-            todo_file.write("- " + cena + "\n")  # add task into the TXT file
+# Ampak shrani le zadnjo vnešeno?
